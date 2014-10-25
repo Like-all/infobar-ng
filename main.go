@@ -6,7 +6,9 @@ import (
     "strings"
     "net"
     "os"
+    "syscall"
     "os/exec"
+    "os/signal"
     "bufio"
     "log"
 )
@@ -45,6 +47,19 @@ func main() {
             fmt.Printf("%s\n", string(buf[:n]))
             msgbus <- string(buf[:n])
             conn.Close()
+        }
+    }()
+
+    c := make(chan os.Signal, 1)
+    signal.Notify(c, syscall.SIGHUP,
+        syscall.SIGINT,
+        syscall.SIGTERM,
+        syscall.SIGQUIT)
+    go func(){
+        for sig := range c {
+            os.Remove(CfgParams.Socket)
+            fmt.Printf("Captured %v, Exiting\n", sig)
+            os.Exit(0)
         }
     }()
 
