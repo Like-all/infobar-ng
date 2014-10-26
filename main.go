@@ -80,8 +80,8 @@ func main() {
     for {
         msg := <-msgbus
         action := strings.Split(msg, ";")
-        current, _ := strconv.Atoi(action[1])
         if action[0] == "plugin" {
+            current, _ := strconv.Atoi(action[1])
             readings[current] = "{ \"full_text\": \"" + CfgParams.Separator + "\", \"color\": \"" + CfgParams.SeparatorColor + "\", \"separator\": false },{ \"name\": \"" + CfgParams.Plugins[current].Name + "\", \"full_text\": \"" + action[3] + "\", \"color\": \"" + action[2] + "\", \"separator\": false }"
         }
         fmt.Printf(",[")

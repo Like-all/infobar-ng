@@ -1,3 +1,4 @@
-*.swp
-
-infobar-ng
+*
+!README.md
+!LICENSE
+!*.go
