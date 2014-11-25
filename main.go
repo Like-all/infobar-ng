@@ -23,7 +23,7 @@ func main() {
     msgbus := make(chan string)
     var readings = make([]string, len(CfgParams.Plugins))
     for i := range readings {
-        readings[i] = "{ \"full_text\": \"" + CfgParams.Separator + "\", \"color\": \"" + CfgParams.SeparatorColor + "\", \"separator\": false },{ \"name\": \"null\", \"full_text\": \"null\", \"color\": \"#101010\", \"separator\": false }"
+        readings[i] = "{ \"full_text\": \"" + CfgParams.Separator + "\", \"color\": \"" + CfgParams.SeparatorColor + "\", \"separator\": false },{ \"name\": \"null\", \"full_text\": \"" + CfgParams.Plugins[i].Name + "\", \"color\": \"#FFFFFF\", \"separator\": false }"
     }
 
     fmt.Printf("{ \"version\": 1 }\n[\n[]\n")
